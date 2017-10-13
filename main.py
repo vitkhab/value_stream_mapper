@@ -1,8 +1,13 @@
 import yaml
 from PIL import Image, ImageFont, ImageDraw
+import argparse
 
-filename = "examples/development.yml"
-stream = open(filename, "r")
+parser = argparse.ArgumentParser(description='Draws Value Stream Map.')
+parser.add_argument('input', type=str, help='Input file path')
+parser.add_argument('output', type=str, help='Output file path')
+args = parser.parse_args()
+
+stream = open(args.input, "r")
 steps = yaml.load(stream)
 
 size = len(steps)*200
@@ -45,4 +50,4 @@ dr.text((10, 140), "LT: {}".format(lead), font=attributes_font, fill=(0,0,0))
 dr.text((10, 160), "VA: {}".format(value), font=attributes_font, fill=(0,0,0))
 dr.text((10, 180), "%C/A: {:.2%}".format(ca), font=attributes_font, fill=(0,0,0))
 
-im.save("rectangle.png")
+im.save(args.output)
