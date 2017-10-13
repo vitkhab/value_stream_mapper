@@ -13,6 +13,9 @@ dr = ImageDraw.Draw(im)
 fnt = ImageFont.truetype('SourceCodePro-Regular.ttf', 20)
 attributes_font = ImageFont.truetype('SourceCodePro-Regular.ttf', 14)
 start = 50
+value = 0
+lead = 0
+ca = 1
 for i, step in enumerate(steps):
     if i != len(steps) - 1:
         arrow = (
@@ -29,9 +32,17 @@ for i, step in enumerate(steps):
     dr.rectangle(((start,25),(start+100,75)), outline="black")
     dr.text((start+10, 35), step["name"], font=fnt, fill=(0,0,0))
     dr.text((start+10, 80), "LT: {}".format(step["lead"]), font=attributes_font, fill=(0,0,0))
+    lead += step["lead"]
     dr.text((start+10, 100), "VA: {}".format(step["value"]), font=attributes_font, fill=(0,0,0))
-    ca = "%C/A: {:.2%}".format(step["accepted"]/step["completed"])
-    dr.text((start+10, 120), ca, font=attributes_font, fill=(0,0,0))
+    value += step["value"]
+    ca_text = "%C/A: {:.2%}".format(step["accepted"]/step["completed"])
+    dr.text((start+10, 120), ca_text, font=attributes_font, fill=(0,0,0))
+    ca *= step["accepted"]/step["completed"]
     start += 200
+
+
+dr.text((10, 140), "LT: {}".format(lead), font=attributes_font, fill=(0,0,0))
+dr.text((10, 160), "VA: {}".format(value), font=attributes_font, fill=(0,0,0))
+dr.text((10, 180), "%C/A: {:.2%}".format(ca), font=attributes_font, fill=(0,0,0))
 
 im.save("rectangle.png")
