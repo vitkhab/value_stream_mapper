@@ -1,0 +1,30 @@
+---
+- name: Analyze
+  lead: 80
+  value: 10
+  accepted: 100
+  completed: 100
+
+- name: Design
+  lead: 80
+  value: 20
+  accepted: 80
+  completed: 100
+
+- name: Develop
+  lead: 120
+  value: 20
+  accepted: 60
+  completed: 100
+
+- name: Test
+  lead: 20
+  value: 8
+  accepted: 40
+  completed: 100
+
+- name: Deploy
+  lead: 160
+  value: 1
+  accepted: 90
+  completed: 100
